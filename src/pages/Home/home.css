@@ -1,0 +1,694 @@
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap");
+
+:root {
+  --primary-gold: #c3a25c;
+  --primary-gold-hover: #e0be75;
+  --dark-bg: #1a1a1a;
+  --light-bg: #fdfbf7;
+  --header-bg: #e6d5ad;
+  --text-main: #333;
+  --text-light: #666;
+  --font-heading: "Playfair Display", serif;
+  --font-body: "Poppins", sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  scroll-behavior: smooth;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: var(--font-body);
+  line-height: 1.6;
+  color: var(--text-main);
+  background-color: var(--light-bg);
+}
+
+/* -------------------------------------
+   PHẦN 1: BANNER & HEADER 
+------------------------------------- */
+.main {
+  background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)),
+    url("/img/hyeryeong-song-R7aysQNEr1o-unsplash.jpg");
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.d1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 40px;
+  background: var(--header-bg);
+  backdrop-filter: blur(10px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.d1 img {
+  width: 120px;
+  height: auto;
+  object-fit: contain;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 30px;
+  padding: 5px 15px;
+  width: 300px;
+  transition: all 0.3s ease;
+}
+
+.search:focus-within {
+  background-color: #fff;
+  border-color: var(--primary-gold);
+}
+
+.search input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text-main);
+  padding: 8px 10px;
+  font-family: var(--font-body);
+}
+
+.search input::placeholder {
+  color: var(--text-light);
+}
+
+.search i {
+  color: var(--primary-gold);
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.login {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.login i {
+  font-size: 1.2rem;
+  color: var(--primary-gold);
+}
+
+.login button {
+  background: transparent;
+  border: none;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.login button a {
+  color: var(--text-main);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.login button a:hover {
+  color: var(--primary-gold);
+}
+
+.login label {
+  color: var(--text-light);
+}
+
+.duongke {
+  display: none; 
+}
+
+/* Navigation Menu */
+.menu {
+  background: var(--header-bg);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.menu ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+}
+
+.menu ul li {
+  position: relative;
+  padding: 15px 0;
+}
+
+.menu ul li a {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+  padding-bottom: 5px;
+}
+
+.menu ul li a:hover {
+  color: var(--primary-gold);
+}
+
+/* Nav Hover underline */
+.menu ul li a::after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: 10px;
+  left: 0;
+  background-color: var(--primary-gold);
+  transition: width 0.3s ease;
+}
+
+.menu ul li a:hover::after {
+  width: 100%;
+}
+
+.sub-menu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fff;
+  min-width: 180px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+  z-index: 10;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.sub-menu.active {
+  display: flex !important;
+}
+
+.sub-menu li {
+  padding: 0;
+  width: 100%;
+}
+
+.sub-menu li a {
+  color: var(--text-main);
+  padding: 10px 20px;
+  display: block;
+  text-transform: none;
+  font-size: 0.95rem;
+}
+
+.sub-menu li a::after {
+  display: none;
+}
+
+.sub-menu li a:hover {
+  background: #f5f5f5;
+  color: var(--primary-gold);
+}
+
+/* Banner Content */
+.d2 {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.c1 {
+  font-family: var(--font-heading);
+  font-size: 5rem;
+  color: #fff;
+  font-weight: 700;
+  line-height: 1.1;
+  text-shadow: 2px 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.morein4 {
+  margin-top: 50px;
+  background: var(--primary-gold);
+  color: #fff;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1rem;
+  font-family: var(--font-body);
+  font-weight: 400;
+  border-radius: 30px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(195, 162, 92, 0.4);
+}
+
+.morein4:hover {
+  background: var(--primary-gold-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(195, 162, 92, 0.6);
+}
+
+.dk {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin-top: 60px;
+  width: 100%;
+  max-width: 800px;
+}
+
+.dk2,
+.dk3,
+.dk4 {
+  flex: 1;
+}
+
+.duongke2,
+.duongke3,
+.duongke4 {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--primary-gold),
+    transparent
+  );
+}
+
+.d3 {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 60px;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(5px);
+}
+
+.c2,
+.c3 {
+  color: #fff;
+  font-size: 0.95rem;
+  letter-spacing: 1px;
+}
+
+/* -------------------------------------
+   PHẦN 2: BÀI ĐĂNG MỚI NHẤT
+------------------------------------- */
+.sub-main {
+  padding: 80px 5%;
+  background: var(--light-bg);
+  font-family: var(--font-body);
+  width: 100%;
+  border-radius: 8px;
+  position: relative; 
+  margin-bottom: 25px;
+}
+
+.d4 {
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.tenmuc {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  color: var(--dark-bg);
+  font-weight: 700;
+}
+
+.d5 {
+  text-align: center;
+  color: var(--text-light);
+  font-size: 1.1rem;
+  margin-bottom: 50px;
+}
+
+.d6 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto 50px auto;
+}
+
+/* Post Cards */
+.fp,
+.sp,
+.tp {
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+  margin: 0; 
+}
+
+.fp:hover,
+.sp:hover,
+.tp:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+}
+
+.fp a,
+.sp a,
+.tp a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.fp img,
+.sp img,
+.tp img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.fp:hover img,
+.sp:hover img,
+.tp:hover img {
+  transform: scale(1.08);
+}
+
+.fp label,
+.sp label,
+.tp label {
+  display: block;
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  color: var(--dark-bg);
+  font-weight: 700;
+  margin: 20px 20px 10px;
+  cursor: pointer;
+}
+
+.fp p,
+.sp p,
+.tp p {
+  font-size: 0.95rem;
+  color: var(--text-light);
+  margin: 0 20px 25px;
+  line-height: 1.7;
+}
+
+/* Xem Thêm Button */
+.more {
+  display: inline-block;
+  margin: 0 auto;
+  border: 1px solid var(--primary-gold);
+  color: var(--primary-gold);
+  border-radius: 30px;
+  padding: 12px 40px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 80px;
+}
+
+.more:hover {
+  background: var(--primary-gold);
+  color: #fff;
+  box-shadow: 0 5px 15px rgba(195, 162, 92, 0.3);
+}
+
+.more label {
+  cursor: pointer;
+}
+
+/* -------------------------------------
+   PHẦN 3: DANH MỤC MÓN ĂN
+------------------------------------- */
+.ngot,
+.man,
+.chay,
+.seafood {
+  position: relative;
+  height: 350px;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  align-items: center !important;
+  text-align: center !important;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.ngot::before,
+.man::before,
+.chay::before,
+.seafood::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+  z-index: 0;
+}
+
+/* Specific Backgrounds */
+.ngot::before {
+  background-image: url("img/dongot.jpg");
+}
+.man::before {
+  background-image: url("img/doman.jpg");
+}
+.chay::before {
+  background-image: url("img/chay.jpg");
+}
+.seafood::before {
+  background-image: url("img/sf.jpg");
+}
+
+/* Overlay */
+.ngot::after,
+.man::after,
+.chay::after,
+.seafood::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  transition: background 0.4s ease;
+  z-index: 1;
+}
+
+.ngot:hover::before,
+.man:hover::before,
+.chay:hover::before,
+.seafood:hover::before {
+  transform: scale(1.1);
+}
+
+.ngot:hover::after,
+.man:hover::after,
+.chay:hover::after,
+.seafood:hover::after {
+  background: rgba(0, 0, 0, 0.3);
+}
+
+/* Content over background */
+.ngot a,
+.man a,
+.chay a,
+.seafood a {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+
+/* Override inline styles from React */
+.ngot i,
+.man i,
+.chay i,
+.seafood i {
+  font-size: 3rem !important;
+  margin: 0 0 15px 0 !important;
+  color: var(--primary-gold) !important;
+  transition: transform 0.3s ease;
+}
+
+.ngot:hover a i,
+.man:hover a i,
+.chay:hover a i,
+.seafood:hover a i {
+  transform: translateY(-5px);
+}
+
+.ngot label,
+.man label,
+.chay label,
+.seafood label {
+  font-family: var(--font-heading);
+  font-size: 2rem !important;
+  margin: 0 0 10px 0 !important;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.ngot p,
+.man p,
+.chay p,
+.seafood p {
+  font-size: 1rem !important;
+  margin: 0 !important;
+  max-width: 80%;
+  opacity: 0.9;
+  font-family: var(--font-body);
+}
+
+/* -------------------------------------
+   PHẦN 4: FOOTER
+------------------------------------- */
+.sub-main4 {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 40px;
+  padding: 80px 60px;
+  background: var(--header-bg);
+  color: var(--text-main);
+}
+
+.sub-main4 h2 {
+  font-family: var(--font-heading);
+  color: var(--dark-bg);
+  font-size: 1.5rem;
+  margin-bottom: 25px;
+  position: relative;
+}
+
+.sub-main4 h2::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 40px;
+  height: 2px;
+  background: var(--primary-gold);
+}
+
+.o1 h2 {
+  font-size: 2rem;
+  color: var(--primary-gold);
+}
+
+.o1 h2::after {
+  display: none;
+}
+
+.o1 i {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  color: var(--dark-bg);
+  transition: color 0.3s ease;
+  margin-top: 20px;
+  cursor: pointer;
+}
+
+.o1 i:hover {
+  color: var(--primary-gold);
+}
+
+.o2 label {
+  display: block;
+  margin-bottom: 10px;
+  color: inherit;
+}
+
+.o3 label,
+.o4 label {
+  display: block;
+  margin-bottom: 12px;
+}
+
+.o3 a,
+.o4 a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.o3 a:hover,
+.o4 a:hover {
+  color: var(--primary-gold);
+  padding-left: 5px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .sub-main4 {
+    grid-template-columns: 1fr 1fr;
+  }
+  .c1 {
+    font-size: 3.5rem;
+  }
+  .search {
+    width: 200px;
+  }
+}
+
+@media (max-width: 600px) {
+  .d1 {
+    flex-direction: column;
+    gap: 15px;
+  }
+  .menu ul {
+    flex-direction: column;
+    gap: 15px;
+    align-items: center;
+  }
+  .d3 {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  .sub-main4 {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 60px 20px;
+  }
+  .sub-main4 h2::after {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
