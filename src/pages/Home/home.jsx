@@ -67,6 +67,13 @@ const Home = () => {
   return (
     <>
       <div className="main">
+        <video autoPlay loop muted playsInline className="video-background">
+          <source
+            src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+            type="video/mp4"
+          />
+        </video>
+        <div className="video-overlay"></div>
         <Header />
 
         <div className="d2">
