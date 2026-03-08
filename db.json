@@ -1,8 +1,39 @@
 {
-  "users": [],
+  "users": [
+    {
+      "email": "haileynguyen612@gmail.com",
+      "username": "Anhnguyen1601",
+      "password": "123456",
+      "wishlist": [],
+      "id": 1
+    },
+    {
+      "email": "haanh161@gmail.com",
+      "username": "Haanh",
+      "password": "123456",
+      "wishlist": [],
+      "id": 2
+    }
+  ],
   "restaurants": [
-    { "id": 1, "name": "Tora Tora", "category": "Mặn", "address": "21 Hàng Hòm, Hoàn Kiếm", "price": "300.000đ - 500.000đ/người", "img": "./img/tora.png", "location": "Hoàn Kiếm" },
-    { "id": 2, "name": "Toast", "category": "Ngọt", "address": "340 Thái Hà, Đống Đa", "price": "50.000đ - 65.000đ", "img": "./img/toast2.png", "location": "Đống Đa" }
+    {
+      "id": 1,
+      "name": "Tora Tora",
+      "category": "Mặn",
+      "address": "21 Hàng Hòm, Hoàn Kiếm",
+      "price": "300.000đ - 500.000đ/người",
+      "img": "./img/tora.png",
+      "location": "Hoàn Kiếm"
+    },
+    {
+      "id": 2,
+      "name": "Toast",
+      "category": "Ngọt",
+      "address": "340 Thái Hà, Đống Đa",
+      "price": "50.000đ - 65.000đ",
+      "img": "./img/toast2.png",
+      "location": "Đống Đa"
+    }
   ],
   "reviews": [],
   "wishlists": []

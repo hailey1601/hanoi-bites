@@ -65,17 +65,17 @@ body, html {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0px 40px;
+  padding: 5px 40px;
   background: var(--header-bg);
   backdrop-filter: blur(10px);
   position: sticky;
   top: 0;
   z-index: 1000;
+  height: 85px;
 }
 
 .d1 img {
-  width: 120px;
-  height: auto;
+  max-height: 100px;
   object-fit: contain;
 }
 
@@ -113,6 +113,48 @@ body, html {
   color: var(--primary-gold);
   font-size: 1.2rem;
   cursor: pointer;
+}
+
+.search-suggestions {
+  position: absolute;
+  top: 120%; 
+  width: 30%;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 15px 0;
+  z-index: 1000;
+  border: 1px solid rgba(0,0,0,0.05);
+}
+
+.search-suggestions h4 {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  padding: 0 15px 10px;
+  margin-bottom: 5px;
+  border-bottom: 1px solid #f0f0f0;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.search-suggestions ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.search-suggestions ul li {
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text-main);
+  transition: all 0.2s ease;
+}
+
+.search-suggestions ul li:hover {
+  background-color: #f9f6f0;
+  color: var(--primary-gold);
+  padding-left: 20px; 
 }
 
 .login {

@@ -69,7 +69,7 @@ const Home = () => {
       <div className="main">
         <video autoPlay loop muted playsInline className="video-background">
           <source
-            src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+            src="../public/cooking.mp4"
             type="video/mp4"
           />
         </video>
