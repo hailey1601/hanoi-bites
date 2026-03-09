@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import "./home.css";
+import dbData from "../../../db.json";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -19,8 +20,7 @@ const Home = () => {
     setIsAiLoading(true);
     setAiResponse(null);
     try {
-      const dbRes = await fetch("http://localhost:8000/restaurants");
-      const restaurants = await dbRes.json();
+      const restaurants = dbData.restaurants;
 
       const apiKey = "AIzaSyCSdxJ93QP8NTPnNd1M8f1GqRVSku1HnHI";
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Header from "../components/Header.jsx";
 import Footer from "../components/Footer.jsx";
+import dbData from "../../db.json";
 
 const RestaurantDetail = () => {
     const { id } = useParams();
@@ -12,9 +13,11 @@ const RestaurantDetail = () => {
     useEffect(() => {
         const fetchDetail = async () => {
             try {
-                const response = await fetch(`http://localhost:8000/restaurants/${id}`);
-                if (!response.ok) throw new Error("Không tìm thấy quán ăn.");
-                const data = await response.json();
+                // const response = await fetch(`http://localhost:8000/restaurants/${id}`);
+                // if (!response.ok) throw new Error("Không tìm thấy quán ăn.");
+                // const data = await response.json();
+                const data = dbData.restaurants.find(r => r.id.toString() === id);
+                if (!data) throw new Error("Không tìm thấy quán ăn.");
                 setRestaurant(data);
             } catch (error) {
                 console.error(error);
