@@ -1,10 +1,68 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import "./home.css";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [aiPrompt, setAiPrompt] = useState("");
+  const [isAiLoading, setIsAiLoading] = useState(false);
+  const [aiResponse, setAiResponse] = useState(null);
+
+  const handleAiSearch = async () => {
+    if (!aiPrompt.trim()) {
+      alert("Bạn hãy nhập yêu cầu để AI gợi ý nhé!");
+      return;
+    }
+
+    setIsAiLoading(true);
+    setAiResponse(null);
+    try {
+      const dbRes = await fetch("http://localhost:8000/restaurants");
+      const restaurants = await dbRes.json();
+
+      const apiKey = "AIzaSyCSdxJ93QP8NTPnNd1M8f1GqRVSku1HnHI";
+
+      const promptText = `
+        Bạn là trợ lý ẩm thực thông minh của app Hanoi Bites.
+        Đây là danh sách các quán ăn hiện có trong hệ thống:
+        ${JSON.stringify(restaurants)}
+
+        Người dùng đang yêu cầu: "${aiPrompt}"
+
+        Hãy phân tích yêu cầu này, đối chiếu với danh mục, giá tiền và địa chỉ để chọn ra 1 quán ăn phù hợp nhất.
+        BẠN CHỈ ĐƯỢC PHÉP TRẢ VỀ DUY NHẤT 1 ĐOẠN JSON CHÍNH XÁC NHƯ SAU, KHÔNG THÊM BẤT KỲ VĂN BẢN NÀO KHÁC:
+        {
+          "id": <id_quán_ăn>,
+          "reason": "<một câu ngắn gọn, thân thiện giải thích tại sao lại chọn quán này cho người dùng>"
+        }
+      `;
+
+      const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: promptText }] }]
+        })
+      });
+
+      const aiData = await aiRes.json();
+      const responseText = aiData.candidates[0].content.parts[0].text;
+
+      const cleanJson = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
+      const result = JSON.parse(cleanJson);
+
+      setAiResponse(result);
+
+    } catch (error) {
+      console.error("Lỗi AI:", error);
+      alert("Trợ lý AI đang đi ăn trưa rồi, bạn hãy thử lại sau nhé!");
+    } finally {
+      setIsAiLoading(false);
+    }
+  };
+
   const categories = [
     {
       name: "Đồ ngọt",
@@ -84,9 +142,60 @@ const Home = () => {
             </label>{" "}
             <br />
           </div>
-          <button style={{ cursor: "pointer" }} className="morein4">
-            THÊM THÔNG TIN
-          </button>
+          <div style={{ display: "flex", gap: "10px", width: "100%", maxWidth: "600px", marginTop: "30px", zIndex: 10 }}>
+            <input
+              type="text"
+              value={aiPrompt}
+              onChange={(e) => setAiPrompt(e.target.value)}
+              placeholder="VD: Gợi ý quán nhiều protein để ăn sau khi tập tạ..."
+              style={{
+                flex: 1, padding: "15px 25px", borderRadius: "30px", border: "none",
+                outline: "none", fontSize: "1rem", boxShadow: "0 4px 15px rgba(0,0,0,0.2)"
+              }}
+              onKeyDown={(e) => e.key === 'Enter' && handleAiSearch()}
+            />
+            <button
+              onClick={handleAiSearch}
+              disabled={isAiLoading}
+              style={{
+                background: "var(--primary-gold)", color: "white", border: "none",
+                padding: "0 30px", borderRadius: "30px", cursor: "pointer",
+                fontWeight: "bold", fontSize: "1rem", transition: "0.3s",
+                boxShadow: "0 4px 15px rgba(195, 162, 92, 0.4)"
+              }}
+            >
+              {isAiLoading ? "Đang nghĩ..." : "✨ Gợi ý"}
+            </button>
+          </div>
+
+          {aiResponse && (
+            <div style={{
+              marginTop: "20px", background: "rgba(255, 255, 255, 0.95)", padding: "20px",
+              borderRadius: "15px", maxWidth: "600px", color: "#333", zIndex: 10,
+              boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
+              display: "flex", flexDirection: "column", gap: "15px", textAlign: "left"
+            }}>
+              <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--primary-gold)", fontWeight: "bold", fontSize: "1.2rem" }}>
+                ✨ Trợ lý AI Hanoi Bites
+              </div>
+              <p style={{ margin: 0, fontSize: "1.05rem", lineHeight: "1.5" }}>{aiResponse.reason}</p>
+              <button
+                onClick={() => navigate(`/restaurant/${aiResponse.id}`)}
+                style={{
+                  background: "var(--dark-bg)", color: "white", border: "none", padding: "10px 20px",
+                  borderRadius: "20px", cursor: "pointer", alignSelf: "flex-end", fontWeight: "600"
+                }}
+              >
+                Xem quán này ➔
+              </button>
+            </div>
+          )}
+
+          <div style={{ display: "flex", gap: "10px", marginTop: "30px" }}>
+            <button className="morein4" style={{ cursor: "pointer", marginTop: 0 }}>
+              THÊM THÔNG TIN
+            </button>
+          </div>
           <div className="dk">
             <div className="dk2"><hr className="duongke2" /></div>
             <div className="dk3"><hr className="duongke3" /></div>

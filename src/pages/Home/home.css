@@ -28,9 +28,7 @@ body, html {
   background-color: var(--light-bg);
 }
 
-/* -------------------------------------
-   PHẦN 1: BANNER & HEADER 
-------------------------------------- */
+
 .main {
   position: relative;
   z-index: 0;
@@ -196,7 +194,7 @@ body, html {
   display: none; 
 }
 
-/* Navigation Menu */
+
 .menu {
   background: var(--header-bg);
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
@@ -229,7 +227,7 @@ body, html {
   color: var(--primary-gold);
 }
 
-/* Nav Hover underline */
+
 .menu ul li a::after {
   content: "";
   position: absolute;
@@ -287,7 +285,7 @@ body, html {
   color: var(--primary-gold);
 }
 
-/* Banner Content */
+
 .d2 {
   flex: 1;
   display: flex;
@@ -372,9 +370,7 @@ body, html {
   letter-spacing: 1px;
 }
 
-/* -------------------------------------
-   PHẦN 2: BÀI ĐĂNG MỚI NHẤT
-------------------------------------- */
+
 .sub-main {
   padding: 80px 5%;
   background: var(--light-bg);
@@ -412,7 +408,7 @@ body, html {
   margin: 0 auto 50px auto;
 }
 
-/* Post Cards */
+
 .fp,
 .sp,
 .tp {
@@ -475,7 +471,7 @@ body, html {
   line-height: 1.7;
 }
 
-/* Xem Thêm Button */
+
 .more {
   display: inline-block;
   margin: 0 auto;
@@ -503,9 +499,7 @@ body, html {
   cursor: pointer;
 }
 
-/* -------------------------------------
-   PHẦN 3: DANH MỤC MÓN ĂN
-------------------------------------- */
+
 .ngot,
 .man,
 .chay,
@@ -537,7 +531,7 @@ body, html {
   z-index: 0;
 }
 
-/* Specific Backgrounds */
+
 .ngot::before {
   background-image: url("img/dongot.jpg");
 }
@@ -551,7 +545,7 @@ body, html {
   background-image: url("img/sf.jpg");
 }
 
-/* Overlay */
+
 .ngot::after,
 .man::after,
 .chay::after,
@@ -581,7 +575,7 @@ body, html {
   background: rgba(0, 0, 0, 0.3);
 }
 
-/* Content over background */
+
 .ngot a,
 .man a,
 .chay a,
@@ -599,7 +593,7 @@ body, html {
   justify-content: center;
 }
 
-/* Override inline styles from React */
+
 .ngot i,
 .man i,
 .chay i,
@@ -639,9 +633,7 @@ body, html {
   font-family: var(--font-body);
 }
 
-/* -------------------------------------
-   PHẦN 4: FOOTER
-------------------------------------- */
+
 .sub-main4 {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -716,7 +708,7 @@ body, html {
   padding-left: 5px;
 }
 
-/* Responsive adjustments */
+
 @media (max-width: 900px) {
   .sub-main4 {
     grid-template-columns: 1fr 1fr;

@@ -1,14 +1,13 @@
 import React, { useState, useRef, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom"; // Thêm useNavigate
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
-    const [showSuggestions, setShowSuggestions] = useState(false); // Quản lý ẩn/hiện gợi ý
+    const [showSuggestions, setShowSuggestions] = useState(false);
 
     const navigate = useNavigate();
-    const searchRef = useRef(null); // Dùng để nhận biết khi click ra ngoài thanh tìm kiếm
+    const searchRef = useRef(null);
 
-    // Danh sách các quận gợi ý
     const hanoiDistricts = [
         "Quận Hoàn Kiếm",
         "Quận Đống Đa",
@@ -18,7 +17,6 @@ const Header = () => {
         "Quận Cầu Giấy"
     ];
 
-    // Hàm tắt gợi ý khi click ra ngoài vùng tìm kiếm
     useEffect(() => {
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -29,10 +27,8 @@ const Header = () => {
         return () => document.removeEventListener("mousedown", handleClickOutside);
     }, []);
 
-    // Hàm xử lý khi click vào một Quận
     const handleDistrictClick = (district) => {
-        setShowSuggestions(false); // Đóng gợi ý
-        // Chuyển sang trang search và truyền tên quận lên thanh URL
+        setShowSuggestions(false);
         navigate(`/search?district=${encodeURIComponent(district)}`);
     };
 
@@ -46,16 +42,14 @@ const Header = () => {
                 </div>
 
                 <form onSubmit={(e) => e.preventDefault()}>
-                    {/* Bọc thanh search bằng div có ref */}
                     <div className="search" ref={searchRef}>
                         <input
                             type="text"
                             placeholder="Tìm kiếm theo quận, tên quán..."
-                            onClick={() => setShowSuggestions(true)} // Mở gợi ý khi click
+                            onClick={() => setShowSuggestions(true)}
                         />
                         <i className="bx bx-search" />
 
-                        {/* Hộp thoại gợi ý thả xuống */}
                         {showSuggestions && (
                             <div className="search-suggestions">
                                 <h4>📍 Khám phá theo Quận</h4>
@@ -80,7 +74,6 @@ const Header = () => {
             </div>
 
             <hr className="duongke" />
-            {/* ... Phần menu bên dưới giữ nguyên ... */}
         </>
     );
 };
