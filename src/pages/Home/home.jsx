@@ -48,6 +48,10 @@ const Home = () => {
       });
 
       const aiData = await aiRes.json();
+      if (!aiData.candidates || !aiData.candidates[0]) {
+        console.error("Lỗi API Trả Về:", aiData);
+        throw new Error("API không trả về kết quả hợp lệ");
+      }
       const responseText = aiData.candidates[0].content.parts[0].text;
 
       const cleanJson = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
