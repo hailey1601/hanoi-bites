@@ -74,6 +74,28 @@ const Header = () => {
             </div>
 
             <hr className="duongke" />
+
+            <div className="menu">
+                <ul>
+                    <li><Link to="/">Trang chủ</Link></li>
+                    <li
+                        onMouseEnter={() => setIsSubMenuOpen(true)}
+                        onMouseLeave={() => setIsSubMenuOpen(false)}
+                    >
+                        <Link to="/restaurants">Quán ăn <i className="bx bx-chevron-down"></i></Link>
+                        {isSubMenuOpen && (
+                            <ul className="sub-menu active">
+                                <li><Link to="/category/sweet">Đồ ngọt</Link></li>
+                                <li><Link to="/category/salty">Đồ mặn</Link></li>
+                                <li><Link to="/category/vegan">Món ăn chay</Link></li>
+                                <li><Link to="/category/seafood">Món hải sản</Link></li>
+                            </ul>
+                        )}
+                    </li>
+                    <li><Link to="/wishlist">Yêu thích</Link></li>
+                    <li><Link to="/about">Giới thiệu</Link></li>
+                </ul>
+            </div>
         </>
     );
 };
