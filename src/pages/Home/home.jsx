@@ -23,7 +23,7 @@ const Home = () => {
     try {
       const restaurants = dbData.restaurants;
 
-      const apiKey = "AIzaSyCSdxJ93QP8NTPnNd1M8f1GqRVSku1HnHI";
+      const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
 
       const promptText = `
         Bạn là trợ lý ẩm thực thông minh của app Hanoi Bites.
