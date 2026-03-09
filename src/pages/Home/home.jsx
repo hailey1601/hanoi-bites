@@ -4,6 +4,7 @@ import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import "./home.css";
 import dbData from "../../../db.json";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const Home = () => {
   const navigate = useNavigate();
@@ -39,42 +40,21 @@ const Home = () => {
         }
       `;
 
-      const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: promptText }] }]
-        })
-      });
+      const genAI = new GoogleGenerativeAI(apiKey);
+      const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
-      const aiData = await aiRes.json();
-
-      if (!aiRes.ok) {
-        console.error("Lỗi HTTP từ Gemini:", aiData);
-        throw new Error(`Lỗi API: ${aiData.error?.message || aiRes.statusText}`);
-      }
-
-      if (!aiData.candidates || aiData.candidates.length === 0) {
-        console.error("Lỗi API Trả Về (Không có candidates):", aiData);
-        throw new Error("API không trả về kết quả hợp lệ");
-      }
-
-      const candidate = aiData.candidates[0];
-      if (!candidate.content || !candidate.content.parts || candidate.content.parts.length === 0) {
-        console.error("Lỗi cấu trúc content:", candidate);
-        throw new Error("Cấu trúc trả về từ API không nguyên vẹn");
-      }
-
-      const responseText = candidate.content.parts[0].text;
+      const result = await model.generateContent(promptText);
+      const responseText = result.response.text();
 
       const cleanJson = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
-      const parsedData = JSON.parse(cleanJson);
+      const aiResult = JSON.parse(cleanJson);
 
-      setAiResponse(parsedData);
+      alert(`✨ Trợ lý AI: ${aiResult.reason}`);
+      navigate(`/restaurant/${aiResult.id}`);
 
     } catch (error) {
-      console.error("Lỗi AI Chi tiết:", error);
-      alert(`Đã xảy ra lỗi AI: ${error.message}. Xin thử lại!`);
+      console.error("Chi tiết lỗi AI:", error);
+      alert("Hệ thống AI đang bảo trì. Vui lòng thử lại sau!");
     } finally {
       setIsAiLoading(false);
     }
@@ -159,30 +139,32 @@ const Home = () => {
             </label>{" "}
             <br />
           </div>
-          <div style={{ display: "flex", gap: "10px", width: "100%", maxWidth: "600px", marginTop: "30px", zIndex: 10 }}>
-            <input
-              type="text"
-              value={aiPrompt}
-              onChange={(e) => setAiPrompt(e.target.value)}
-              placeholder="VD: Gợi ý quán nhiều protein để ăn sau khi tập tạ..."
-              style={{
-                flex: 1, padding: "15px 25px", borderRadius: "30px", border: "none",
-                outline: "none", fontSize: "1rem", boxShadow: "0 4px 15px rgba(0,0,0,0.2)"
-              }}
-              onKeyDown={(e) => e.key === 'Enter' && handleAiSearch()}
-            />
-            <button
-              onClick={handleAiSearch}
-              disabled={isAiLoading}
-              style={{
-                background: "var(--primary-gold)", color: "white", border: "none",
-                padding: "0 30px", borderRadius: "30px", cursor: "pointer",
-                fontWeight: "bold", fontSize: "1rem", transition: "0.3s",
-                boxShadow: "0 4px 15px rgba(195, 162, 92, 0.4)"
-              }}
-            >
-              {isAiLoading ? "Đang nghĩ..." : "✨ Gợi ý"}
-            </button>
+          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "100%", maxWidth: "600px", marginTop: "30px", zIndex: 10 }}>
+            <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+              <input
+                type="text"
+                value={aiPrompt}
+                onChange={(e) => setAiPrompt(e.target.value)}
+                placeholder="VD: Gợi ý quán nhiều protein để ăn sau khi tập tạ..."
+                style={{
+                  flex: 1, padding: "15px 25px", borderRadius: "30px", border: "none",
+                  outline: "none", fontSize: "1rem", boxShadow: "0 4px 15px rgba(0,0,0,0.2)"
+                }}
+                onKeyDown={(e) => e.key === 'Enter' && handleAiSearch()}
+              />
+              <button
+                onClick={handleAiSearch}
+                disabled={isAiLoading}
+                style={{
+                  background: "var(--primary-gold)", color: "white", border: "none",
+                  padding: "0 30px", borderRadius: "30px", cursor: "pointer",
+                  fontWeight: "bold", fontSize: "1rem", transition: "0.3s",
+                  boxShadow: "0 4px 15px rgba(195, 162, 92, 0.4)"
+                }}
+              >
+                {isAiLoading ? "Đang xử lý..." : "Hôm nay ăn gì?"}
+              </button>
+            </div>
           </div>
 
           {aiResponse && (
