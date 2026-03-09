@@ -48,11 +48,24 @@ const Home = () => {
       });
 
       const aiData = await aiRes.json();
-      if (!aiData.candidates || !aiData.candidates[0]) {
-        console.error("Lỗi API Trả Về:", aiData);
+
+      if (!aiRes.ok) {
+        console.error("Lỗi HTTP từ Gemini:", aiData);
+        throw new Error(`Lỗi API: ${aiData.error?.message || aiRes.statusText}`);
+      }
+
+      if (!aiData.candidates || aiData.candidates.length === 0) {
+        console.error("Lỗi API Trả Về (Không có candidates):", aiData);
         throw new Error("API không trả về kết quả hợp lệ");
       }
-      const responseText = aiData.candidates[0].content.parts[0].text;
+
+      const candidate = aiData.candidates[0];
+      if (!candidate.content || !candidate.content.parts || candidate.content.parts.length === 0) {
+        console.error("Lỗi cấu trúc content:", candidate);
+        throw new Error("Cấu trúc trả về từ API không nguyên vẹn");
+      }
+
+      const responseText = candidate.content.parts[0].text;
 
       const cleanJson = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
       const result = JSON.parse(cleanJson);
@@ -60,8 +73,8 @@ const Home = () => {
       setAiResponse(result);
 
     } catch (error) {
-      console.error("Lỗi AI:", error);
-      alert("Trợ lý AI đang đi ăn trưa rồi, bạn hãy thử lại sau nhé!");
+      console.error("Lỗi AI Chi tiết:", error);
+      alert(`Đã xảy ra lỗi AI: ${error.message}. Xin thử lại!`);
     } finally {
       setIsAiLoading(false);
     }
