@@ -97,7 +97,7 @@ const Home = () => {
   const posts = [
     {
       title: "Tora Tora",
-      img: "./img/tora.png",
+      img: "/img/tora.png",
       addr: "21 Hàng Hòm, Hoàn Kiếm",
       time: "18:30 - 23:00 (T2 - T5) | 18:30 - 24:00 (T6 - CN)",
       price: "300.000đ - 500.000đ/người",
@@ -105,7 +105,7 @@ const Home = () => {
     },
     {
       title: "Izakaya Matsuki",
-      img: "./img/izakaya.png",
+      img: "/img/izakaya.png",
       addr: "26 Linh lang, Ba Đình",
       time: "17:00 - 1:00",
       price: "300.000đ - 400.000đ",
@@ -127,7 +127,7 @@ const Home = () => {
       <div className="main">
         <video autoPlay loop muted playsInline className="video-background">
           <source
-            src="../public/cooking.mp4"
+            src="/cooking.mp4"
             type="video/mp4"
           />
         </video>

@@ -533,16 +533,16 @@ body, html {
 
 
 .ngot::before {
-  background-image: url("img/dongot.jpg");
+  background-image: url("/img/dongot.jpg");
 }
 .man::before {
-  background-image: url("img/doman.jpg");
+  background-image: url("/img/doman.jpg");
 }
 .chay::before {
-  background-image: url("img/chay.jpg");
+  background-image: url("/img/chay.jpg");
 }
 .seafood::before {
-  background-image: url("img/sf.jpg");
+  background-image: url("/img/sf.jpg");
 }
 
 
