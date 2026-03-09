@@ -35,43 +35,45 @@ const Header = () => {
     return (
         <>
             <div className="d1">
-                <div>
+                <div style={{ flex: 1, display: "flex", justifyContent: "flex-start" }}>
                     <Link to="/">
                         <img src="/img/logo.png" alt="Logo" />
                     </Link>
                 </div>
 
-                <form onSubmit={(e) => e.preventDefault()}>
-                    <div className="search" ref={searchRef}>
-                        <input
-                            type="text"
-                            placeholder="Tìm kiếm theo quận, tên quán..."
-                            onClick={() => setShowSuggestions(true)}
-                        />
-                        <i className="bx bx-search" />
+                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                    <form onSubmit={(e) => e.preventDefault()}>
+                        <div className="search" ref={searchRef}>
+                            <input
+                                type="text"
+                                placeholder="Tìm kiếm theo quận, tên quán..."
+                                onClick={() => setShowSuggestions(true)}
+                            />
+                            <i className="bx bx-search" />
 
-                        {showSuggestions && (
-                            <div className="search-suggestions">
-                                <h4>📍 Khám phá theo Quận</h4>
-                                <ul>
-                                    {hanoiDistricts.map((district, index) => (
-                                        <li key={index} onClick={() => handleDistrictClick(district)}>
-                                            {district}
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        )}
-                    </div>
-                </form>
+                            {showSuggestions && (
+                                <div className="search-suggestions">
+                                    <h4>📍 Khám phá theo Quận</h4>
+                                    <ul>
+                                        {hanoiDistricts.map((district, index) => (
+                                            <li key={index} onClick={() => handleDistrictClick(district)}>
+                                                {district}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            )}
+                        </div>
+                    </form>
+                </div>
 
-                <div className="login">
+                <div className="login" style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
                     <i className="bx bx-user" />
                     <button><Link to="/login">Đăng nhập</Link></button>
                     <label> / </label>
                     <button><Link to="/register">Đăng ký</Link></button>
                 </div>
-            </div>
+            </div >
 
             <hr className="duongke" />
 

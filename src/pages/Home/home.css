@@ -403,7 +403,7 @@ body, html {
 .d6 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 60px;
+  gap: 80px;
   max-width: 1200px;
   margin: 0 auto 50px auto;
 }
