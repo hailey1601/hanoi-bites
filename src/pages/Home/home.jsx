@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import "./home.css";
@@ -40,12 +39,33 @@ const Home = () => {
         }
       `;
 
-      const genAI = new GoogleGenerativeAI(apiKey);
-      const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+      const aiRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: promptText }] }]
+        })
+      });
 
-      const result = await model.generateContent(promptText);
-      const response = await result.response;
-      const responseText = response.text();
+      const aiData = await aiRes.json();
+
+      if (!aiRes.ok) {
+        console.error("Lỗi HTTP từ Gemini:", aiData);
+        throw new Error(`Lỗi API: ${aiData.error?.message || aiRes.statusText}`);
+      }
+
+      if (!aiData.candidates || aiData.candidates.length === 0) {
+        console.error("Lỗi API Trả Về (Không có candidates):", aiData);
+        throw new Error("API không trả về kết quả hợp lệ");
+      }
+
+      const candidate = aiData.candidates[0];
+      if (!candidate.content || !candidate.content.parts || candidate.content.parts.length === 0) {
+        console.error("Lỗi cấu trúc content:", candidate);
+        throw new Error("Cấu trúc trả về từ API không nguyên vẹn");
+      }
+
+      const responseText = candidate.content.parts[0].text;
 
       const cleanJson = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
       const parsedData = JSON.parse(cleanJson);
