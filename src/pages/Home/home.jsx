@@ -22,7 +22,8 @@ const Home = () => {
         title: 'Lưu ý!',
         text: 'Bạn hãy nhập yêu cầu để AI gợi ý nhé!',
         icon: 'warning',
-        confirmButtonText: 'Đã hiểu'
+        confirmButtonText: 'Đã hiểu',
+        confirmButtonColor: '#8B4513'
       });
       return;
     }
@@ -63,6 +64,7 @@ const Home = () => {
         text: aiResult.reason,
         icon: 'info',
         confirmButtonText: 'Tuyệt vời',
+        confirmButtonColor: '#8B4513',
         timer: 3500
       }).then(() => {
         navigate(`/restaurant/${aiResult.id}`);
@@ -74,7 +76,8 @@ const Home = () => {
         title: 'Rất tiếc!',
         text: 'Hệ thống AI đang bảo trì. Vui lòng thử lại sau!',
         icon: 'error',
-        confirmButtonText: 'Đóng'
+        confirmButtonText: 'Đóng',
+        confirmButtonColor: '#8B4513'
       });
     } finally {
       setIsAiLoading(false);
@@ -115,7 +118,7 @@ const Home = () => {
   const posts = [
     {
       title: "Tora Tora",
-      img: "/img/tora.png",
+      img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?q=80&w=800&auto=format&fit=crop",
       addr: "21 Hàng Hòm, Hoàn Kiếm",
       time: "18:30 - 23:00 (T2 - T5) | 18:30 - 24:00 (T6 - CN)",
       price: "300.000đ - 500.000đ/người",
@@ -123,7 +126,7 @@ const Home = () => {
     },
     {
       title: "Izakaya Matsuki",
-      img: "/img/izakaya.png",
+      img: "https://images.unsplash.com/photo-1582878826629-29b7ad1cb431?q=80&w=800&auto=format&fit=crop",
       addr: "26 Linh lang, Ba Đình",
       time: "17:00 - 1:00",
       price: "300.000đ - 400.000đ",
@@ -131,7 +134,7 @@ const Home = () => {
     },
     {
       title: "Toast",
-      img: "/img/toast2.png",
+      img: "https://images.unsplash.com/photo-1550617931-e17a7b70dce2?q=80&w=800&auto=format&fit=crop",
       addr: "340 Thái Hà, Đống Đa",
       time: "8:00 - 23:00",
       price: "50.000đ - 65.000đ",

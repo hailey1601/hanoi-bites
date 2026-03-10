@@ -30,17 +30,14 @@ const Login = () => {
         setIsLoading(true);
 
         try {
-            // Retrieve users from localStorage
             const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-            // Find user matching username or email
             const user = storedUsers.find(
                 u => (u.username === formData.username || u.email === formData.username) &&
                     u.password === formData.password
             );
 
             if (user) {
-                // Successful login
                 localStorage.setItem("currentUser", JSON.stringify(user));
 
                 MySwal.fire({
@@ -48,12 +45,12 @@ const Login = () => {
                     text: 'Đăng nhập thành công!',
                     icon: 'success',
                     confirmButtonText: 'Tuyệt vời',
+                    confirmButtonColor: '#8B4513',
                     timer: 2000
                 }).then(() => {
                     navigate("/");
                 });
             } else {
-                // Failed login
                 setErrorMsg("Sai tên đăng nhập hoặc mật khẩu.");
             }
         } catch (error) {

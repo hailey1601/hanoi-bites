@@ -31,10 +31,8 @@ const Register = () => {
         setIsLoading(true);
 
         try {
-            // Get existing users from localStorage or initialize as empty array
             const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-            // Check if email already exists
             const existingUser = storedUsers.find(user => user.email === formData.email);
 
             if (existingUser) {
@@ -43,20 +41,17 @@ const Register = () => {
                 return;
             }
 
-            // Create new user object
             const newUser = {
-                id: Date.now().toString(), // Use timestamp as a simple unique ID
+                id: Date.now().toString(),
                 email: formData.email,
                 username: formData.username,
                 password: formData.password,
                 wishlist: []
             };
 
-            // Add new user to the array and save back to localStorage
             storedUsers.push(newUser);
             localStorage.setItem("users", JSON.stringify(storedUsers));
 
-            // Set current user session
             localStorage.setItem("currentUser", JSON.stringify(newUser));
 
             MySwal.fire({
@@ -64,6 +59,7 @@ const Register = () => {
                 text: 'Đăng ký tài khoản thành công! Chào mừng bạn đến với Hanoi Bites.',
                 icon: 'success',
                 confirmButtonText: 'Tuyệt vời',
+                confirmButtonColor: '#8B4513',
                 timer: 2000
             }).then(() => {
                 navigate("/");
