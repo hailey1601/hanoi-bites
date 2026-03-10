@@ -88,7 +88,7 @@ const Header = () => {
                             <span style={{ fontWeight: "bold", marginRight: "10px" }}>
                                 Xin chào, {currentUser.username}!
                             </span>
-                            <button onClick={handleLogout} style={{ cursor: "pointer", background: "none", border: "none", color: "#e53e3e", padding: 0 }}>
+                            <button onClick={handleLogout} style={{ cursor: "pointer", background: "none", border: "none", color: "var(--primary-gold)", padding: 0 }}>
                                 Đăng xuất
                             </button>
                         </>
