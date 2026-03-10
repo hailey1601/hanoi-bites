@@ -17,7 +17,15 @@ const Header = () => {
         "Quận Cầu Giấy"
     ];
 
+    const [currentUser, setCurrentUser] = useState(null);
+
     useEffect(() => {
+        // Fetch current user from localStorage on mount
+        const user = localStorage.getItem("currentUser");
+        if (user) {
+            setCurrentUser(JSON.parse(user));
+        }
+
         const handleClickOutside = (event) => {
             if (searchRef.current && !searchRef.current.contains(event.target)) {
                 setShowSuggestions(false);
@@ -30,6 +38,12 @@ const Header = () => {
     const handleDistrictClick = (district) => {
         setShowSuggestions(false);
         navigate(`/search?district=${encodeURIComponent(district)}`);
+    };
+
+    const handleLogout = () => {
+        localStorage.removeItem("currentUser");
+        setCurrentUser(null);
+        navigate("/");
     };
 
     return (
@@ -67,11 +81,24 @@ const Header = () => {
                     </form>
                 </div>
 
-                <div className="login" style={{ flex: 1, display: "flex", justifyContent: "flex-end" }}>
-                    <i className="bx bx-user" />
-                    <button><Link to="/login">Đăng nhập</Link></button>
-                    <label> / </label>
-                    <button><Link to="/signup">Đăng ký</Link></button>
+                <div className="login" style={{ flex: 1, display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
+                    <i className="bx bx-user" style={{ marginRight: "5px" }} />
+                    {currentUser ? (
+                        <>
+                            <span style={{ fontWeight: "bold", marginRight: "10px" }}>
+                                Xin chào, {currentUser.username}!
+                            </span>
+                            <button onClick={handleLogout} style={{ cursor: "pointer", background: "none", border: "none", color: "#e53e3e", padding: 0 }}>
+                                Đăng xuất
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            <button><Link to="/login">Đăng nhập</Link></button>
+                            <label style={{ margin: "0 5px" }}> / </label>
+                            <button><Link to="/signup">Đăng ký</Link></button>
+                        </>
+                    )}
                 </div>
             </div >
 
