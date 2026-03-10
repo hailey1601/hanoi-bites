@@ -21,49 +21,46 @@ const Register = () => {
         setFormData({ ...formData, [name]: value });
     };
 
-    const handleRegisterSubmit = async (e) => {
+    const handleRegisterSubmit = (e) => {
         e.preventDefault();
         setErrorMsg("");
         setIsLoading(true);
 
         try {
-            const checkUser = await fetch(`http://localhost:5000/users?email=${formData.email}`);
-            const existingUsers = await checkUser.json();
+            // Get existing users from localStorage or initialize as empty array
+            const storedUsers = JSON.parse(localStorage.getItem("users")) || [];
 
-            if (existingUsers.length > 0) {
+            // Check if email already exists
+            const existingUser = storedUsers.find(user => user.email === formData.email);
+
+            if (existingUser) {
                 setErrorMsg("Email này đã được đăng ký. Vui lòng sử dụng email khác.");
                 setIsLoading(false);
                 return;
             }
 
-            const response = await fetch("http://localhost:5000/users", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    email: formData.email,
-                    username: formData.username,
-                    password: formData.password,
-                    wishlist: []
-                }),
-            });
+            // Create new user object
+            const newUser = {
+                id: Date.now().toString(), // Use timestamp as a simple unique ID
+                email: formData.email,
+                username: formData.username,
+                password: formData.password,
+                wishlist: []
+            };
 
-            if (!response.ok) {
-                throw new Error("Có lỗi xảy ra khi kết nối máy chủ.");
-            }
+            // Add new user to the array and save back to localStorage
+            storedUsers.push(newUser);
+            localStorage.setItem("users", JSON.stringify(storedUsers));
 
-            const newUser = await response.json();
-
+            // Set current user session
             localStorage.setItem("currentUser", JSON.stringify(newUser));
 
             alert("Đăng ký tài khoản thành công! Chào mừng bạn đến với Hanoi Bites.");
-
             navigate("/");
 
         } catch (error) {
             console.error("Lỗi Đăng Ký:", error);
-            setErrorMsg("Đã xảy ra sự cố mạng. Vui lòng thử lại sau.");
+            setErrorMsg("Đã xảy ra sự cố. Vui lòng thử lại sau.");
         } finally {
             setIsLoading(false);
         }
