@@ -134,7 +134,7 @@ const Home = () => {
     },
     {
       title: "Toast",
-      img: "/img/toast.png",
+      img: "/img/toast2.png",
       addr: "340 Thái Hà, Đống Đa",
       time: "8:00 - 23:00",
       price: "50.000đ - 65.000đ",
