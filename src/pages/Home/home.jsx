@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import "./home.css";
 import dbData from "../../../db.json";
 import { GoogleGenerativeAI } from "@google/generative-ai";
+
+const MySwal = withReactContent(Swal);
 
 const Home = () => {
   const navigate = useNavigate();
@@ -14,7 +18,12 @@ const Home = () => {
 
   const handleAiSearch = async () => {
     if (!aiPrompt.trim()) {
-      alert("Bạn hãy nhập yêu cầu để AI gợi ý nhé!");
+      MySwal.fire({
+        title: 'Lưu ý!',
+        text: 'Bạn hãy nhập yêu cầu để AI gợi ý nhé!',
+        icon: 'warning',
+        confirmButtonText: 'Đã hiểu'
+      });
       return;
     }
 
@@ -49,12 +58,24 @@ const Home = () => {
       const cleanJson = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
       const aiResult = JSON.parse(cleanJson);
 
-      alert(`✨ Trợ lý AI: ${aiResult.reason}`);
-      navigate(`/restaurant/${aiResult.id}`);
+      MySwal.fire({
+        title: '✨ Trợ lý AI:',
+        text: aiResult.reason,
+        icon: 'info',
+        confirmButtonText: 'Tuyệt vời',
+        timer: 3500
+      }).then(() => {
+        navigate(`/restaurant/${aiResult.id}`);
+      });
 
     } catch (error) {
       console.error("Chi tiết lỗi AI:", error);
-      alert("Hệ thống AI đang bảo trì. Vui lòng thử lại sau!");
+      MySwal.fire({
+        title: 'Rất tiếc!',
+        text: 'Hệ thống AI đang bảo trì. Vui lòng thử lại sau!',
+        icon: 'error',
+        confirmButtonText: 'Đóng'
+      });
     } finally {
       setIsAiLoading(false);
     }

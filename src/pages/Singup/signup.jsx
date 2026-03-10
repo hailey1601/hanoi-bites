@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import "./signup.css";
+
+const MySwal = withReactContent(Swal);
 
 const Register = () => {
     const [formData, setFormData] = useState({
@@ -55,8 +59,15 @@ const Register = () => {
             // Set current user session
             localStorage.setItem("currentUser", JSON.stringify(newUser));
 
-            alert("Đăng ký tài khoản thành công! Chào mừng bạn đến với Hanoi Bites.");
-            navigate("/");
+            MySwal.fire({
+                title: 'Chào mừng!',
+                text: 'Đăng ký tài khoản thành công! Chào mừng bạn đến với Hanoi Bites.',
+                icon: 'success',
+                confirmButtonText: 'Tuyệt vời',
+                timer: 2000
+            }).then(() => {
+                navigate("/");
+            });
 
         } catch (error) {
             console.error("Lỗi Đăng Ký:", error);

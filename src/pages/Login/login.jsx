@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2';
+import withReactContent from 'sweetalert2-react-content';
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import "./login.css";
+
+const MySwal = withReactContent(Swal);
 
 const Login = () => {
     const [formData, setFormData] = useState({
@@ -38,8 +42,16 @@ const Login = () => {
             if (user) {
                 // Successful login
                 localStorage.setItem("currentUser", JSON.stringify(user));
-                alert("Đăng nhập thành công!");
-                navigate("/");
+
+                MySwal.fire({
+                    title: 'Thành công!',
+                    text: 'Đăng nhập thành công!',
+                    icon: 'success',
+                    confirmButtonText: 'Tuyệt vời',
+                    timer: 2000
+                }).then(() => {
+                    navigate("/");
+                });
             } else {
                 // Failed login
                 setErrorMsg("Sai tên đăng nhập hoặc mật khẩu.");
