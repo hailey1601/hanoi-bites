@@ -20,7 +20,6 @@ const Header = () => {
     const [currentUser, setCurrentUser] = useState(null);
 
     useEffect(() => {
-        // Fetch current user from localStorage on mount
         const user = localStorage.getItem("currentUser");
         if (user) {
             setCurrentUser(JSON.parse(user));
