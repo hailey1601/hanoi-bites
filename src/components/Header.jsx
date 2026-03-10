@@ -71,7 +71,7 @@ const Header = () => {
                     <i className="bx bx-user" />
                     <button><Link to="/login">Đăng nhập</Link></button>
                     <label> / </label>
-                    <button><Link to="/register">Đăng ký</Link></button>
+                    <button><Link to="/signup">Đăng ký</Link></button>
                 </div>
             </div >
 
