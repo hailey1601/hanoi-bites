@@ -118,7 +118,7 @@ const Home = () => {
   const posts = [
     {
       title: "Tora Tora",
-      img: "/img/restaurants/restaurant_1.jpg",
+      img: "/img/tora.png",
       addr: "21 Hàng Hòm, Hoàn Kiếm",
       time: "18:30 - 23:00 (T2 - T5) | 18:30 - 24:00 (T6 - CN)",
       price: "300.000đ - 500.000đ/người",
@@ -126,7 +126,7 @@ const Home = () => {
     },
     {
       title: "Izakaya Matsuki",
-      img: "/img/restaurants/restaurant_3.jpg",
+      img: "/img/izakaya.png",
       addr: "26 Linh lang, Ba Đình",
       time: "17:00 - 1:00",
       price: "300.000đ - 400.000đ",
@@ -134,7 +134,7 @@ const Home = () => {
     },
     {
       title: "Toast",
-      img: "/img/restaurants/restaurant_2.jpg",
+      img: "/img/toast.png",
       addr: "340 Thái Hà, Đống Đa",
       time: "8:00 - 23:00",
       price: "50.000đ - 65.000đ",
