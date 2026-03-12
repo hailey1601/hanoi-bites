@@ -5,6 +5,8 @@ import Login from "./pages/Login/login.jsx";
 import Signup from "./pages/Singup/signup.jsx";
 import SearchResults from "./pages/SearchResults.jsx";
 import RestaurantDetail from "./pages/RestaurantDetail.jsx";
+import CategoryPage from "./pages/CategoryPage.jsx";
+import Restaurants from "./pages/Restaurants.jsx";
 
 function App() {  
   return (
@@ -14,6 +16,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/search" element={<SearchResults />} />
+        <Route path="/restaurants" element={<Restaurants />} />
+        <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/restaurant/:id" element={<RestaurantDetail />} />
         <Route path="*" element={<h1 style={{ textAlign: "center", marginTop: "50px" }}>404 - Không tìm thấy trang</h1>} />
       </Routes>
