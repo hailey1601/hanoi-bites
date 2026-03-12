@@ -241,29 +241,22 @@ const Home = () => {
         </div>
 
         <div className="d6">
-          {posts.map((post, index) => (
-            <div className={post.class} key={index}>
-              {post.link ? (
-                <Link to={post.link} style={{ textDecoration: "none", color: "inherit" }}>
+          {posts.map((post, index) => {
+            // Provide a default link mapping based on static post sequence
+            const targetLink = post.link || (index === 0 ? "/restaurant/1" : index === 1 ? "/restaurant/16" : "/restaurants");
+            return (
+              <div className={post.class} key={index}>
+                <Link to={targetLink} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
                   <img src={post.img} alt={post.title} /> <br />
-                  <label> {post.title} </label>
+                  <label style={{cursor: "pointer"}}> {post.title} </label>
                   <p>
                     [ {post.addr} ] <br />⏰ {post.time} <br />
                     💵 {post.price}
                   </p>
                 </Link>
-              ) : (
-                <>
-                  <img src={post.img} alt={post.title} /> <br />
-                  <label> {post.title} </label>
-                  <p>
-                    [ {post.addr} ] <br />⏰ {post.time} <br />
-                    💵 {post.price}
-                  </p>
-                </>
-              )}
-            </div>
-          ))}
+              </div>
+            );
+          })}
         </div>
       </div>
 
