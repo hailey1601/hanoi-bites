@@ -4,7 +4,7 @@
 }
 
 .about-hero {
-    background: #f5e6c4;
+    background: #cea647;
     padding: 80px 20px;
     text-align: center;
 }
@@ -26,8 +26,9 @@
     margin: -40px auto 50px;
     background: white;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
     padding: 60px;
+    position: relative;
 }
 
 .about-section {
