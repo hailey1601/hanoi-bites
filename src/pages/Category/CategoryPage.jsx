@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import Header from "../components/Header.jsx";
-import Footer from "../components/Footer.jsx";
-import dbData from "../../db.json";
+import Header from "../../components/Header.jsx";
+import Footer from "../../components/Footer.jsx";
+import dbData from "../../../db.json";
 import "./CategoryPage.css";
 
 const CategoryPage = () => {

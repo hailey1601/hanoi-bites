@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import Header from "../components/Header.jsx";
-import Footer from "../components/Footer.jsx";
-import dbData from "../../db.json";
+import Header from "../../components/Header.jsx";
+import Footer from "../../components/Footer.jsx";
+import dbData from "../../../db.json";
 import "./Restaurants.css";
 
 const Restaurants = () => {

@@ -267,9 +267,9 @@ const Home = () => {
         </div>
       </div>
 
-      <div className="more">
-        <label> Xem thêm </label>
-      </div>
+      <Link to="/restaurants" className="more" style={{textDecoration: "none", display: "inline-flex", alignItems: "center", justifyContent: "center"}}>
+        <label style={{cursor: "pointer"}}> Xem thêm </label>
+      </Link>
 
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
         {categories.map((category, index) => (

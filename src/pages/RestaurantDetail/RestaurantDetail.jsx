@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import Header from "../components/Header.jsx";
-import Footer from "../components/Footer.jsx";
-import dbData from "../../db.json";
+import Header from "../../components/Header.jsx";
+import Footer from "../../components/Footer.jsx";
+import dbData from "../../../db.json";
 
 const RestaurantDetail = () => {
     const { id } = useParams();
@@ -54,7 +54,24 @@ const RestaurantDetail = () => {
                     <p>🏷️ <b>Danh mục:</b> {restaurant.category}</p>
                 </div>
 
-                <button style={{ padding: "10px 20px", background: "var(--primary-gold)", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "1rem" }}>
+                <button 
+                    onClick={() => {
+                        const user = localStorage.getItem("currentUser");
+                        if (!user) {
+                            alert("Vui lòng đăng nhập để thêm vào danh sách yêu thích!");
+                            return;
+                        }
+                        const parsedUser = JSON.parse(user);
+                        const localWishlist = JSON.parse(localStorage.getItem(`wishlist_${parsedUser.username}`)) || [];
+                        if (localWishlist.includes(restaurant.id)) {
+                            alert("Quán này đã có trong danh sách yêu thích của bạn!");
+                        } else {
+                            localWishlist.push(restaurant.id);
+                            localStorage.setItem(`wishlist_${parsedUser.username}`, JSON.stringify(localWishlist));
+                            alert("Đã thêm vào danh sách yêu thích thành công!");
+                        }
+                    }}
+                    style={{ padding: "10px 20px", background: "var(--primary-gold)", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "1rem", transition: "all 0.3s" }}>
                     ❤️ Thêm vào yêu thích
                 </button>
 
