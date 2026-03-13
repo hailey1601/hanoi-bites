@@ -1,0 +1,40 @@
+.header__left {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.header__center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.header__right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.header__user-icon {
+  margin-right: 5px;
+}
+
+.header__greeting {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.header__logout {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: var(--primary-gold);
+  padding: 0;
+  font: inherit;
+}
+
+.header__separator {
+  margin: 0 5px;
+}

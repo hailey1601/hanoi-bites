@@ -3,6 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import Header from "../../components/Header.jsx";
 import Footer from "../../components/Footer.jsx";
 import dbData from "../../../db.json";
+import "./RestaurantDetail.css";
 
 const RestaurantDetail = () => {
     const { id } = useParams();
@@ -26,29 +27,29 @@ const RestaurantDetail = () => {
         fetchDetail();
     }, [id]);
 
-    if (isLoading) return <h2 style={{ textAlign: "center", marginTop: "100px" }}>Đang dọn bàn...</h2>;
-    if (!restaurant) return <h2 style={{ textAlign: "center", marginTop: "100px" }}>Quán ăn không tồn tại!</h2>;
+    if (isLoading) return <h2 className="restaurant-detail__status">Đang dọn bàn...</h2>;
+    if (!restaurant) return <h2 className="restaurant-detail__status">Quán ăn không tồn tại!</h2>;
 
     return (
         <>
             <Header />
 
-            <div style={{ maxWidth: "800px", margin: "50px auto", padding: "20px", fontFamily: "var(--font-body)" }}>
-                <Link to="/" style={{ color: "var(--primary-gold)", textDecoration: "none", fontWeight: "bold" }}>
+            <div className="restaurant-detail">
+                <Link to="/" className="restaurant-detail__back">
                     ← Quay lại
                 </Link>
 
                 <img
                     src={restaurant.img}
                     alt={restaurant.name}
-                    style={{ width: "100%", height: "400px", objectFit: "cover", borderRadius: "10px", marginTop: "20px" }}
+                    className="restaurant-detail__image"
                 />
 
-                <h1 style={{ fontFamily: "var(--font-heading)", color: "var(--primary-gold)", marginTop: "20px" }}>
+                <h1 className="restaurant-detail__title">
                     {restaurant.name}
                 </h1>
 
-                <div style={{ margin: "20px 0", fontSize: "1.1rem", lineHeight: "1.8" }}>
+                <div className="restaurant-detail__info">
                     <p>📍 <b>Địa chỉ:</b> {restaurant.address}</p>
                     <p>💵 <b>Mức giá:</b> {restaurant.price}</p>
                     <p>🏷️ <b>Danh mục:</b> {restaurant.category}</p>
@@ -71,13 +72,13 @@ const RestaurantDetail = () => {
                             alert("Đã thêm vào danh sách yêu thích thành công!");
                         }
                     }}
-                    style={{ padding: "10px 20px", background: "var(--primary-gold)", color: "white", border: "none", borderRadius: "5px", cursor: "pointer", fontSize: "1rem", transition: "all 0.3s" }}>
+                    className="restaurant-detail__wishlist-btn">
                     ❤️ Thêm vào yêu thích
                 </button>
 
-                <hr style={{ margin: "40px 0", borderColor: "#eee" }} />
+                <hr className="restaurant-detail__divider" />
                 <h3>Bình luận / Review</h3>
-                <p style={{ color: "gray" }}>Tính năng bình luận sẽ được cập nhật sau...</p>
+                <p className="restaurant-detail__coming-soon">Tính năng bình luận sẽ được cập nhật sau...</p>
 
             </div>
 

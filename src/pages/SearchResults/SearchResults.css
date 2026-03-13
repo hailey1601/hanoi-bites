@@ -1,0 +1,15 @@
+.search-results {
+  min-height: 60vh;
+  padding: 80px 5%;
+  background: var(--light-bg);
+}
+
+.search-results__title {
+  font-family: var(--font-heading);
+  color: var(--dark-bg);
+  margin-bottom: 30px;
+}
+
+.search-results__highlight {
+  color: var(--primary-gold);
+}

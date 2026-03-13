@@ -1,0 +1,57 @@
+.restaurant-detail__status {
+  text-align: center;
+  margin-top: 100px;
+}
+
+.restaurant-detail {
+  max-width: 800px;
+  margin: 50px auto;
+  padding: 20px;
+  font-family: var(--font-body);
+}
+
+.restaurant-detail__back {
+  color: var(--primary-gold);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.restaurant-detail__image {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+.restaurant-detail__title {
+  font-family: var(--font-heading);
+  color: var(--primary-gold);
+  margin-top: 20px;
+}
+
+.restaurant-detail__info {
+  margin: 20px 0;
+  font-size: 1.1rem;
+  line-height: 1.8;
+}
+
+.restaurant-detail__wishlist-btn {
+  padding: 10px 20px;
+  background: var(--primary-gold);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.3s;
+}
+
+.restaurant-detail__divider {
+  margin: 40px 0;
+  border-color: #eee;
+}
+
+.restaurant-detail__coming-soon {
+  color: gray;
+}

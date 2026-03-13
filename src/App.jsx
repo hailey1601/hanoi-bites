@@ -9,6 +9,7 @@ import CategoryPage from "./pages/Category/CategoryPage.jsx";
 import Restaurants from "./pages/Restaurants/Restaurants.jsx";
 import About from "./pages/About/About.jsx";
 import Wishlist from "./pages/Wishlist/Wishlist.jsx";
+import "./App.css";
 
 function App() {  
   return (
@@ -23,7 +24,7 @@ function App() {
         <Route path="/restaurants" element={<Restaurants />} />
         <Route path="/category/:categoryId" element={<CategoryPage />} />
         <Route path="/restaurant/:id" element={<RestaurantDetail />} />
-        <Route path="*" element={<h1 style={{ textAlign: "center", marginTop: "50px" }}>404 - Không tìm thấy trang</h1>} />
+        <Route path="*" element={<h1 className="app__not-found">404 - Không tìm thấy trang</h1>} />
       </Routes>
     </BrowserRouter>
   );

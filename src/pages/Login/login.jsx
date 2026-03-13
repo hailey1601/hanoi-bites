@@ -71,7 +71,7 @@ const Login = () => {
                         <h1> Đăng nhập </h1>
 
                         {errorMsg && (
-                            <div style={{ color: "#ff4d4d", marginBottom: "15px", textAlign: "center", fontSize: "14px" }}>
+                            <div className="auth-error">
                                 {errorMsg}
                             </div>
                         )}

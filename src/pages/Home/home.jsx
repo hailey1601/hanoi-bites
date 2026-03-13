@@ -163,28 +163,20 @@ const Home = () => {
             </label>{" "}
             <br />
           </div>
-          <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "10px", width: "100%", maxWidth: "600px", marginTop: "30px", zIndex: 10 }}>
-            <div style={{ display: "flex", gap: "10px", width: "100%" }}>
+          <div className="ai-search">
+            <div className="ai-search__row">
               <input
                 type="text"
                 value={aiPrompt}
                 onChange={(e) => setAiPrompt(e.target.value)}
                 placeholder="VD: Gợi ý quán nhiều protein để ăn sau khi tập tạ..."
-                style={{
-                  flex: 1, padding: "15px 25px", borderRadius: "30px", border: "none",
-                  outline: "none", fontSize: "1rem", boxShadow: "0 4px 15px rgba(0,0,0,0.2)"
-                }}
+                className="ai-search__input"
                 onKeyDown={(e) => e.key === 'Enter' && handleAiSearch()}
               />
               <button
                 onClick={handleAiSearch}
                 disabled={isAiLoading}
-                style={{
-                  background: "var(--primary-gold)", color: "white", border: "none",
-                  padding: "0 30px", borderRadius: "30px", cursor: "pointer",
-                  fontWeight: "bold", fontSize: "1rem", transition: "0.3s",
-                  boxShadow: "0 4px 15px rgba(195, 162, 92, 0.4)"
-                }}
+                className="ai-search__button"
               >
                 {isAiLoading ? "Đang xử lý..." : "Hôm nay ăn gì?"}
               </button>
@@ -192,30 +184,22 @@ const Home = () => {
           </div>
 
           {aiResponse && (
-            <div style={{
-              marginTop: "20px", background: "rgba(255, 255, 255, 0.95)", padding: "20px",
-              borderRadius: "15px", maxWidth: "600px", color: "#333", zIndex: 10,
-              boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-              display: "flex", flexDirection: "column", gap: "15px", textAlign: "left"
-            }}>
-              <div style={{ display: "flex", alignItems: "center", gap: "10px", color: "var(--primary-gold)", fontWeight: "bold", fontSize: "1.2rem" }}>
+            <div className="ai-result">
+              <div className="ai-result__title">
                 ✨ Trợ lý AI Hanoi Bites
               </div>
-              <p style={{ margin: 0, fontSize: "1.05rem", lineHeight: "1.5" }}>{aiResponse.reason}</p>
+              <p className="ai-result__reason">{aiResponse.reason}</p>
               <button
                 onClick={() => navigate(`/restaurant/${aiResponse.id}`)}
-                style={{
-                  background: "var(--dark-bg)", color: "white", border: "none", padding: "10px 20px",
-                  borderRadius: "20px", cursor: "pointer", alignSelf: "flex-end", fontWeight: "600"
-                }}
+                className="ai-result__cta"
               >
                 Xem quán này ➔
               </button>
             </div>
           )}
 
-          <div style={{ display: "flex", gap: "10px", marginTop: "30px" }}>
-            <button className="morein4" style={{ cursor: "pointer", marginTop: 0 }}>
+          <div className="home-moreinfo">
+            <button className="morein4 home-moreinfo__button">
               THÊM THÔNG TIN
             </button>
           </div>
@@ -242,13 +226,12 @@ const Home = () => {
 
         <div className="d6">
           {posts.map((post, index) => {
-            // Provide a default link mapping based on static post sequence
             const targetLink = post.link || (index === 0 ? "/restaurant/1" : index === 1 ? "/restaurant/16" : "/restaurants");
             return (
               <div className={post.class} key={index}>
-                <Link to={targetLink} style={{ textDecoration: "none", color: "inherit", display: "block" }}>
+                <Link to={targetLink} className="home-postlink">
                   <img src={post.img} alt={post.title} /> <br />
-                  <label style={{cursor: "pointer"}}> {post.title} </label>
+                  <label className="home-postlink__title"> {post.title} </label>
                   <p>
                     [ {post.addr} ] <br />⏰ {post.time} <br />
                     💵 {post.price}
@@ -260,25 +243,24 @@ const Home = () => {
         </div>
       </div>
 
-      <Link to="/restaurants" className="more" style={{textDecoration: "none", display: "inline-flex", alignItems: "center", justifyContent: "center"}}>
-        <label style={{cursor: "pointer"}}> Xem thêm </label>
+      <Link to="/restaurants" className="more home-morelink">
+        <label className="home-morelink__label"> Xem thêm </label>
       </Link>
 
-      <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center" }}>
+      <div className="home-categories">
         {categories.map((category, index) => (
-          <div className={category.class} key={index} style={{ width: "50%" }}>
-            <Link to={category.link} style={{ textDecoration: "none" }}>
+          <div className={`${category.class} home-categories__item`} key={index}>
+            <Link to={category.link} className="home-categories__link">
               <i
-                className={`bx ${category.icon}`}
-                style={{ fontSize: "30px", marginTop: "50px", marginLeft: "60px", color: "white" }}
+                className={`bx ${category.icon} home-categories__icon`}
               />{" "}
               <br />
-              <label style={{ fontSize: "22px", marginLeft: "60px", color: "white", cursor: "pointer" }}>
+              <label className="home-categories__label">
                 {" "}
                 {category.name}{" "}
               </label>{" "}
               <br />
-              <p style={{ fontFamily: "Lucida Sans", fontSize: "14px", marginLeft: "60px", color: "white" }}>
+              <p className="home-categories__desc">
                 {category.desc}
               </p>
             </Link>

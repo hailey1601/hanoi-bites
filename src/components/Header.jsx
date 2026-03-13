@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import "./Header.css";
 
 const Header = () => {
     const [isSubMenuOpen, setIsSubMenuOpen] = useState(false);
@@ -48,13 +49,13 @@ const Header = () => {
     return (
         <>
             <div className="d1">
-                <div style={{ flex: 1, display: "flex", justifyContent: "flex-start" }}>
+                <div className="header__left">
                     <Link to="/">
                         <img src="/img/logo.png" alt="Logo" />
                     </Link>
                 </div>
 
-                <div style={{ flex: 1, display: "flex", justifyContent: "center" }}>
+                <div className="header__center">
                     <form onSubmit={(e) => e.preventDefault()}>
                         <div className="search" ref={searchRef}>
                             <input
@@ -80,21 +81,21 @@ const Header = () => {
                     </form>
                 </div>
 
-                <div className="login" style={{ flex: 1, display: "flex", justifyContent: "flex-end", alignItems: "center" }}>
-                    <i className="bx bx-user" style={{ marginRight: "5px" }} />
+                <div className="login header__right">
+                    <i className="bx bx-user header__user-icon" />
                     {currentUser ? (
                         <>
-                            <span style={{ fontWeight: "bold", marginRight: "10px" }}>
+                            <span className="header__greeting">
                                 Xin chào, {currentUser.username}!
                             </span>
-                            <button onClick={handleLogout} style={{ cursor: "pointer", background: "none", border: "none", color: "var(--primary-gold)", padding: 0 }}>
+                            <button onClick={handleLogout} className="header__logout">
                                 Đăng xuất
                             </button>
                         </>
                     ) : (
                         <>
                             <button><Link to="/login">Đăng nhập</Link></button>
-                            <label style={{ margin: "0 5px" }}> / </label>
+                            <label className="header__separator"> / </label>
                             <button><Link to="/signup">Đăng ký</Link></button>
                         </>
                     )}
