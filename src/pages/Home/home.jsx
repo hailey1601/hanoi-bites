@@ -62,10 +62,11 @@ const Home = () => {
         text: aiResult.reason,
         icon: 'info',
         confirmButtonText: 'Tuyệt vời',
-        confirmButtonColor: '#8B4513',
-        timer: 3500
-      }).then(() => {
-        navigate(`/restaurant/${aiResult.id}`);
+        confirmButtonColor: '#8B4513'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate(`/restaurant/${aiResult.id}`);
+        }
       });
 
     } catch (error) {
