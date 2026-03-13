@@ -14,7 +14,6 @@ const Home = () => {
   const navigate = useNavigate();
   const [aiPrompt, setAiPrompt] = useState("");
   const [isAiLoading, setIsAiLoading] = useState(false);
-  const [aiResponse, setAiResponse] = useState(null);
 
   const handleAiSearch = async () => {
     if (!aiPrompt.trim()) {
@@ -29,7 +28,6 @@ const Home = () => {
     }
 
     setIsAiLoading(true);
-    setAiResponse(null);
     try {
       const restaurants = dbData.restaurants;
 
@@ -58,14 +56,16 @@ const Home = () => {
 
       const cleanJson = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
       const aiResult = JSON.parse(cleanJson);
-      setAiResponse(aiResult);
 
       MySwal.fire({
         title: '✨ Trợ lý AI:',
         text: aiResult.reason,
         icon: 'info',
         confirmButtonText: 'Tuyệt vời',
-        confirmButtonColor: '#8B4513'
+        confirmButtonColor: '#8B4513',
+        timer: 3500
+      }).then(() => {
+        navigate(`/restaurant/${aiResult.id}`);
       });
 
     } catch (error) {
@@ -180,21 +180,6 @@ const Home = () => {
               </button>
             </div>
           </div>
-
-          {aiResponse && (
-            <div className="ai-result">
-              <div className="ai-result__title">
-                ✨ Trợ lý AI Hanoi Bites
-              </div>
-              <p className="ai-result__reason">{aiResponse.reason}</p>
-              <button
-                onClick={() => navigate(`/restaurant/${aiResponse.id}`)}
-                className="ai-result__cta"
-              >
-                Xem quán này ➔
-              </button>
-            </div>
-          )}
 
           <div className="home-moreinfo">
             <button className="morein4 home-moreinfo__button">
