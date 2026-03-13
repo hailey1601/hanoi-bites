@@ -58,6 +58,7 @@ const Home = () => {
 
       const cleanJson = responseText.replace(/```json/g, "").replace(/```/g, "").trim();
       const aiResult = JSON.parse(cleanJson);
+      setAiResponse(aiResult);
 
       MySwal.fire({
         title: '✨ Trợ lý AI:',
