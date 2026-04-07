@@ -44,7 +44,7 @@ const Home = () => {
         BẠN CHỈ ĐƯỢC PHÉP TRẢ VỀ DUY NHẤT 1 ĐOẠN JSON CHÍNH XÁC NHƯ SAU, KHÔNG THÊM BẤT KỲ VĂN BẢN NÀO KHÁC:
         {
           "id": <id_quán_ăn>,
-          "reason": "<một câu ngắn gọn, thân thiện giải thích tại sao lại chọn quán này cho người dùng>"
+          "reason": "một câu ngắn gọn, thân thiện giải thích tại sao lại chọn quán này cho người dùng"
         }
       `;
 
